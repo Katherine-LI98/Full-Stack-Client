@@ -12,19 +12,24 @@ function Login() {
 
   const login = () => {
     const data = { usename: username, password: password };
-    axios.post("http://localhost:3001/auth/login", data).then((response) => {
-      if (response.data.error) {
-        alert(response.data.error);
-      } else {
-        localStorage.setItem("accessToken", response.data.token);
-        setAuthState({
-          usename: response.data.usename,
-          id: response.data.id,
-          status: true,
-        });
-        history("/");
-      }
-    });
+    axios
+      .post(
+        "https://full-stack-api-7700c02c4458.herokuapp.com/auth/login",
+        data
+      )
+      .then((response) => {
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          localStorage.setItem("accessToken", response.data.token);
+          setAuthState({
+            usename: response.data.usename,
+            id: response.data.id,
+            status: true,
+          });
+          history("/");
+        }
+      });
   };
   return (
     <div className="loginContainer">

@@ -36,7 +36,7 @@ function App() {
   // refresh page
   useEffect(() => {
     axios
-      .get("http://localhost:3001/auth/auth", {
+      .get("https://full-stack-api-7700c02c4458.herokuapp.com/auth/auth", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

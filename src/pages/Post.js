@@ -14,19 +14,23 @@ function Post() {
   let history = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
+    axios
+      .get(`https://full-stack-api-7700c02c4458.herokuapp.com/posts/byId/${id}`)
+      .then((response) => {
+        setPostObject(response.data);
+      });
 
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
-      setComments(response.data);
-    });
+    axios
+      .get(`https://full-stack-api-7700c02c4458.herokuapp.com/comments/${id}`)
+      .then((response) => {
+        setComments(response.data);
+      });
   }, [id]);
 
   const addComment = () => {
     axios
       .post(
-        "http://localhost:3001/comments",
+        "https://full-stack-api-7700c02c4458.herokuapp.com/comments",
         {
           commentBody: newComment,
           PostId: id,
@@ -55,9 +59,12 @@ function Post() {
 
   const deleteComment = (id) => {
     axios
-      .delete(`http://localhost:3001/comments/${id}`, {
-        headers: { accessToken: localStorage.getItem("accessToken") },
-      })
+      .delete(
+        `https://full-stack-api-7700c02c4458.herokuapp.com/comments/${id}`,
+        {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }
+      )
       .then(() => {
         setComments(
           comments.filter((val) => {
@@ -69,7 +76,7 @@ function Post() {
 
   const deletePost = (id) => {
     axios
-      .delete(`http://localhost:3001/posts/${id}`, {
+      .delete(`https://full-stack-api-7700c02c4458.herokuapp.com/posts/${id}`, {
         headers: { accessToken: localStorage.getItem("accessToken") },
       })
       .then(() => {
@@ -81,7 +88,7 @@ function Post() {
     if (option === "title") {
       let newTitle = prompt("Enter New Title:");
       axios.put(
-        `http://localhost:3001/posts/title`,
+        `https://full-stack-api-7700c02c4458.herokuapp.com/posts/title`,
         { newTitle: newTitle, id: id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       );
@@ -91,7 +98,7 @@ function Post() {
     } else {
       let newPostText = prompt("Enter New Text:");
       axios.put(
-        `http://localhost:3001/posts/postText`,
+        `https://full-stack-api-7700c02c4458.herokuapp.com/posts/postText`,
         { newText: newPostText, id: id },
         { headers: { accessToken: localStorage.getItem("accessToken") } }
       );
